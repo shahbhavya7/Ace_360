@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,11 +34,18 @@ export default function RootLayout({ children }) {
             <Header/>
             <main className="min-h-screen">  {children}</main>
             {/* Footer */}
-            <footer className="bg-muted/50 py-12">
-              <div className="container mx-auto px-4 text-center text-gray-200">
-                <p>Made by Bhavya</p>
-              </div>
-            </footer>
+      <footer className="text-center py-8 bg-transparent text-sm">
+  <div className="container mx-auto px-4 space-y-1 text-cyan-200/80">
+    <p>
+      © 2025 <span className="text-cyan-400 font-semibold">Ace 360</span>
+    </p>
+    <p>
+      Crafted with care by <span className="text-cyan-400 font-semibold">Bhavya</span>.
+    </p>
+  </div>
+</footer>
+
+
           
           </ThemeProvider>
       </body>

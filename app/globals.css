@@ -116,9 +116,24 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+/* globals.css */
+body {
+  @apply text-white;
+
+  background-color: #0d1117;
+
+  background-image:
+    radial-gradient(circle at top center, rgba(0, 200, 255, 0.06) 0%, transparent 70%),
+    url('/grid.svg');
+
+  background-size: 100% 100%, 60px 60px;
+  background-repeat: no-repeat, repeat;
+  background-attachment: fixed;
+  background-position: top center, center;
+}
+
+
+
 }
 
 .hero-image-wrapper {

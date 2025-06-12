@@ -1,25 +1,29 @@
-import { UserPlus, FileEdit, Users, LineChart } from "lucide-react";
+import {
+  BadgePlus,
+  FileText,
+  BotMessageSquare,
+  TrendingUp,
+} from "lucide-react";
 
 export const howItWorks = [
   {
-    title: "Professional Onboarding",
-    description: "Share your industry and expertise for personalized guidance",
-    icon: <UserPlus className="w-8 h-8 text-primary" />,
+    title: "Smart Onboarding",
+    description: "Kickstart with tailored questions that map your career journey.",
+    icon: <BadgePlus className="w-8 h-8 text-cyan-400" />,
   },
   {
-    title: "Craft Your Documents",
-    description: "Create ATS-optimized resumes and compelling cover letters",
-    icon: <FileEdit className="w-8 h-8 text-primary" />,
+    title: "Optimize Your Resume",
+    description: "Create AI-optimized resumes and standout cover letters.",
+    icon: <FileText className="w-8 h-8 text-cyan-400" />,
   },
   {
-    title: "Prepare for Interviews",
-    description:
-      "Practice with AI-powered mock interviews tailored to your role",
-    icon: <Users className="w-8 h-8 text-primary" />,
+    title: "Mock Interviews with AI",
+    description: "Get real-time feedback through simulated interviews and role-play.",
+    icon: <BotMessageSquare className="w-8 h-8 text-cyan-400" />,
   },
   {
-    title: "Track Your Progress",
-    description: "Monitor improvements with detailed performance analytics",
-    icon: <LineChart className="w-8 h-8 text-primary" />,
+    title: "Measure and Improve",
+    description: "Visualize your growth with skill metrics and performance graphs.",
+    icon: <TrendingUp className="w-8 h-8 text-cyan-400" />,
   },
 ];

@@ -177,3 +177,7 @@ body {
   height: 100%;
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.9));
 }
+
+[data-placeholder] {
+  color: rgb(103 232 249 / 0.7) !important; /* ~cyan-300/70 */
+}

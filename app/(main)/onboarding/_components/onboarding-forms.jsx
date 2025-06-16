@@ -45,22 +45,6 @@ const OnboardingForm = ({ industries }) => {
     data: updateResult, // the updateResult contains the data collected from the form recieved via the useFetch hook
   } = useFetch(updateUser); // the use-fetch takes updateUser as a callback function also returns the data , loading and final updateUserFn function
 
-  const onSubmit = async (values) => {
-    try {
-      const formattedIndustry = `${values.industry}-${values.subIndustry
-        .toLowerCase()
-        .replace(/ /g, "-")}`;
-
-      await updateUserFn({ // invoke the updateUserFn function with the data collected from the form and set the loading and error state variables accordingly 
-      // during submission of the form
-        ...values,
-        industry: formattedIndustry,
-      });
-    } catch (error) {
-      console.error("Onboarding error:", error);
-    }
-  };
-
   const {
     register,
     handleSubmit,
@@ -72,13 +56,32 @@ const OnboardingForm = ({ industries }) => {
     // resolver as our form validation library passing onboardingSchema which has our form validation rules
   });
 
-    useEffect(() => { // this useEffect hook is called whenever the updateResult or updateLoading state changes according to useFetch hook
+
+  const onSubmit = async (values) => {
+    try {
+      const formattedIndustry = `${values.industry}-${values.subIndustry
+        .toLowerCase()
+        .replace(/ /g, "-")}`;
+
+      await updateUserFn({ // invoke the updateUserFn function with the data collected from the form and set the loading and error state variables accordingly 
+        // during submission of the form
+        ...values,
+        industry: formattedIndustry,
+      });
+    } catch (error) {
+      console.error("Onboarding error:", error);
+    }
+  };
+
+
+
+  useEffect(() => { // this useEffect hook is called whenever the updateResult or updateLoading state changes according to useFetch hook
     if (updateResult?.success && !updateLoading) {
       toast.success("Profile completed successfully!");
       router.push("/dashboard");
       router.refresh();
     }
-  }, [updateResult, updateLoading]); 
+  }, [updateResult, updateLoading]);
 
   const watchIndustry = watch("industry");
 

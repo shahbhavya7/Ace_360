@@ -3,6 +3,7 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { generateAIInsights } from "./dashboard";
 
 export async function updateUser(data) { // data is the data passed from the form and form hits this api along with the data
      const { userId } = await auth(); // check if user is logged in, if logged in, get userId , {userId} is a destructured object from the auth() function
@@ -34,20 +35,16 @@ export async function updateUser(data) { // data is the data passed from the for
 
         // operation-2 If industry doesn't exist, create it with default values
         if (!industryInsight) {
-          industryInsight = await db.industryInsight.create({
-            data: {
-              industry: data.industry,
-              salaryRanges: [],
-              growthRate: 0,
-              demandLevel: "Medium",
-              topSkills: [],
-              marketOutlook: "Neutral",
-              keyTrends: [],
-              recommendedSkills: [],
-              nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Set next update to 7 days from now
-            },
-          });
-        }
+         const insights = await generateAIInsights(data.industry); // Generate insights for the user's industry by retrieving the industry from the user object
+         
+              industryInsight = await db.industryInsight.create({ // Create a new industryInsight record in the database with the generated insights
+              data: { // in .create method, we pass the data object with the following properties industry, insights, and nextUpdate
+                 industry: data.industry,
+                 ...insights,
+                 nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Set nextUpdate to one week from now , it will be used to determine when the insights should be updated next
+               }, // it returns the newly created industryInsight record
+             });
+  }
 
         // operation-3 Now update the user's fields in the User table with the industry from the IndustryInsight table
         const updatedUser = await tx.user.update({

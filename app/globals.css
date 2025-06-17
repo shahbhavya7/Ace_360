@@ -181,3 +181,6 @@ body {
 [data-placeholder] {
   color: rgb(103 232 249 / 0.7) !important; /* ~cyan-300/70 */
 }
+.recharts-active-shape rect {
+  fill: rgba(14, 165, 233, 0.1) !important; /* soft blue, override default gray */
+}

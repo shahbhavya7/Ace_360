@@ -61,34 +61,35 @@ export async function saveQuizResult(questions, answers, score) { // Function to
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
-  const user = await db.user.findUnique({
+  const user = await db.user.findUnique({ // Find the user in the database using their clerkUserId if they are logged in
     where: { clerkUserId: userId },
   });
 
-  if (!user) throw new Error("User not found");
+  if (!user) throw new Error("User not found"); // If user is not found, throw an error
 
-  const questionResults = questions.map((q, index) => ({
-    question: q.question,
-    answer: q.correctAnswer,
-    userAnswer: answers[index],
-    isCorrect: q.correctAnswer === answers[index],
-    explanation: q.explanation,
+  const questionResults = questions.map((q, index) => ({ // Take each question and its index and Map through the questions and create an object for each 
+  // question with its details
+    question: q.question, // first member in the object is the question text
+    answer: q.correctAnswer, // second member is the correct answer from the question object which has correctAnswer property in json format
+    userAnswer: answers[index], // third member is the user's answer from the answers array passed in saveQuizResult
+    isCorrect: q.correctAnswer === answers[index], // fourth member is a boolean indicating if the user's answer is correct
+    explanation: q.explanation, // fifth member is the explanation for the correct answer
   }));
 
   // Get wrong answers
-  const wrongAnswers = questionResults.filter((q) => !q.isCorrect);
+  const wrongAnswers = questionResults.filter((q) => !q.isCorrect); // Filter the question results to get only the questions where the user's answer is incorrect
 
   // Only generate improvement tips if there are wrong answers
   let improvementTip = null;
-  if (wrongAnswers.length > 0) {
+  if (wrongAnswers.length > 0) { // If there are wrong answers, generate an improvement tip
     const wrongQuestionsText = wrongAnswers
-      .map(
+      .map( // Map through the wrong answers and format them into a string
         (q) =>
           `Question: "${q.question}"\nCorrect Answer: "${q.answer}"\nUser Answer: "${q.userAnswer}"`
       )
       .join("\n\n");
 
-    const improvementPrompt = `
+    const improvementPrompt = ` 
       The user got the following ${user.industry} technical interview questions wrong:
 
       ${wrongQuestionsText}
@@ -97,21 +98,21 @@ export async function saveQuizResult(questions, answers, score) { // Function to
       Focus on the knowledge gaps revealed by these wrong answers.
       Keep the response under 2 sentences and make it encouraging.
       Don't explicitly mention the mistakes, instead focus on what to learn/practice.
-    `;
+    `; // Generate a prompt for the generative model to create an improvement tip based on the user's wrong answers
 
     try {
-      const tipResult = await model.generateContent(improvementPrompt);
-
-      improvementTip = tipResult.response.text().trim();
-      console.log(improvementTip);
+      const tipResult = await model.generateContent(improvementPrompt); // Call the generative model to generate content based on the improvement prompt
+ 
+      improvementTip = tipResult.response.text().trim(); // Get the text from the response and trim it
+      console.log(improvementTip); // Log the improvement tip for debugging
     } catch (error) {
       console.error("Error generating improvement tip:", error);
       // Continue without improvement tip if generation fails
     }
   }
 
-  try {
-    const assessment = await db.assessment.create({
+  try { // Save the assessment result to the database
+    const assessment = await db.assessment.create({ // Create a new assessment record in the database
       data: {
         userId: user.id,
         quizScore: score,
@@ -128,7 +129,7 @@ export async function saveQuizResult(questions, answers, score) { // Function to
   }
 }
 
-export async function getAssessments() {
+export async function getAssessments() { // Function to get all assessments for the logged-in user.
   const { userId } = await auth();
   if (!userId) throw new Error("Unauthorized");
 
@@ -139,7 +140,7 @@ export async function getAssessments() {
   if (!user) throw new Error("User not found");
 
   try {
-    const assessments = await db.assessment.findMany({
+    const assessments = await db.assessment.findMany({ // Find all assessments for the user in the database according to their userId
       where: {
         userId: user.id,
       },
@@ -148,7 +149,7 @@ export async function getAssessments() {
       },
     });
 
-    return assessments;
+    return assessments; // Return the assessments found in the database
   } catch (error) {
     console.error("Error fetching assessments:", error);
     throw new Error("Failed to fetch assessments");

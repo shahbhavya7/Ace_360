@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 function Progress({
   className,
   value,
-  indicatorClassName, // 👈 custom prop for indicator
+  indicatorClassName,
   ...props
 }) {
   return (
@@ -21,7 +21,11 @@ function Progress({
     >
       <ProgressPrimitive.Indicator
         data-slot="progress-indicator"
-        className={cn("h-full transition-all bg-cyan-400", indicatorClassName)} // 👈 this allows override
+        className={cn(
+          // Gradient + animated shimmer effect
+          "h-full transition-all bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 bg-[length:200%_100%] animate-gradient-x",
+          indicatorClassName
+        )}
         style={{
           transform: `translateX(-${100 - (value || 0)}%)`,
         }}

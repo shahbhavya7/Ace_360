@@ -28,15 +28,17 @@ export const onboardingSchema = z.object({
   ),
 });
 
-export const contactSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  mobile: z.string().optional(),
-  linkedin: z.string().optional(),
-  twitter: z.string().optional(),
+export const contactSchema = z.object({ // contactSchema is an object which contains the contact information of the user
+  // it is used in the resumeSchema for the contact information of the user in form
+  email: z.string().email("Invalid email address"), // email is a string checked by zod if it is not a string, it will throw an error
+  mobile: z.string().optional(), // mobile is an optional string checked by zod if it is not a string, it will throw an error
+  linkedin: z.string().optional(),  // linkedin is an optional string checked by zod if it is not a string, it will throw an error
+  twitter: z.string().optional(), // twitter is an optional string checked by zod if it is not a string, it will throw an error
 });
 
 export const entrySchema = z
-  .object({
+  .object({ // entrySchema is an object which contains the information of the user in form
+    // it is used in the resumeSchema for the experience, education and projects of the user
     title: z.string().min(1, "Title is required"),
     organization: z.string().min(1, "Organization is required"),
     startDate: z.string().min(1, "Start date is required"),
@@ -44,8 +46,9 @@ export const entrySchema = z
     description: z.string().min(1, "Description is required"),
     current: z.boolean().default(false),
   })
-  .refine(
-    (data) => {
+  .refine( // refine is a method to add custom validation to the schema
+    // it takes a function which returns true if the data is valid and false if the data
+    (data) => { // if the data is not present and the endDate is not present then it is invalid return false and show the error message on the endDate field
       if (!data.current && !data.endDate) {
         return false;
       }
@@ -57,13 +60,13 @@ export const entrySchema = z
     }
   );
 
-export const resumeSchema = z.object({
-  contactInfo: contactSchema,
-  summary: z.string().min(1, "Professional summary is required"),
-  skills: z.string().min(1, "Skills are required"),
-  experience: z.array(entrySchema),
-  education: z.array(entrySchema),
-  projects: z.array(entrySchema),
+export const resumeSchema = z.object({ // combined schema for resume 
+  contactInfo: contactSchema, // for contact information of the user use contactSchema
+  summary: z.string().min(1, "Professional summary is required"), // summary is a string checked by zod if it is not a string, it will throw an error
+  skills: z.string().min(1, "Skills are required"), // skills is a string checked by zod if it is not a string, it will throw an error
+  experience: z.array(entrySchema), // experience is an array from some entrySchema objects
+  education: z.array(entrySchema), // education is an array from some entrySchema objects
+  projects: z.array(entrySchema), // projects is an array from some entrySchema objects
 });
 
 export const coverLetterSchema = z.object({

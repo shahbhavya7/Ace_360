@@ -5,57 +5,52 @@ import * as TabsPrimitive from "@radix-ui/react-tabs"
 
 import { cn } from "@/lib/utils"
 
-function Tabs({
-  className,
-  ...props
-}) {
+function Tabs({ className, ...props }) {
   return (
     <TabsPrimitive.Root
       data-slot="tabs"
       className={cn("flex flex-col gap-2", className)}
-      {...props} />
+      {...props}
+    />
   );
 }
 
-function TabsList({
-  className,
-  ...props
-}) {
+function TabsList({ className, ...props }) {
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
       className={cn(
-        "bg-muted text-muted-foreground inline-flex h-9 w-fit items-center justify-center rounded-lg p-[3px]",
+        "bg-[#0f172a] border border-cyan-500/20 rounded-lg p-[3px] inline-flex w-fit items-center justify-center gap-1",
         className
       )}
-      {...props} />
+      {...props}
+    />
   );
 }
 
-function TabsTrigger({
-  className,
-  ...props
-}) {
+function TabsTrigger({ className, ...props }) {
   return (
     <TabsPrimitive.Trigger
       data-slot="tabs-trigger"
       className={cn(
-        "data-[state=active]:bg-background dark:data-[state=active]:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-ring dark:data-[state=active]:border-input dark:data-[state=active]:bg-input/30 text-foreground dark:text-muted-foreground inline-flex h-[calc(100%-1px)] flex-1 items-center justify-center gap-1.5 rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-[color,box-shadow] focus-visible:ring-[3px] focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:shadow-sm [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        "px-4 py-2 text-sm font-medium text-cyan-300 hover:text-cyan-100 transition-colors duration-200 rounded-md whitespace-nowrap",
+        "data-[state=active]:text-white data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500 data-[state=active]:to-blue-500 data-[state=active]:shadow-md",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500",
+        "disabled:opacity-50 disabled:pointer-events-none",
         className
       )}
-      {...props} />
+      {...props}
+    />
   );
 }
 
-function TabsContent({
-  className,
-  ...props
-}) {
+function TabsContent({ className, ...props }) {
   return (
     <TabsPrimitive.Content
       data-slot="tabs-content"
       className={cn("flex-1 outline-none", className)}
-      {...props} />
+      {...props}
+    />
   );
 }
 

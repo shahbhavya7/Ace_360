@@ -6,68 +6,69 @@ import { revalidatePath } from "next/cache";
 import { generateAIInsights } from "./dashboard";
 
 export async function updateUser(data) { // data is the data passed from the form and form hits this api along with the data
-     const { userId } = await auth(); // check if user is logged in, if logged in, get userId , {userId} is a destructured object from the auth() function
+  const { userId } = await auth(); // check if user is logged in, if logged in, get userId , {userId} is a destructured object from the auth() function
   if (!userId) throw new Error("Unauthorized");
 
   const user = await db.user.findUnique({ // find the user in the database where the userId from database matches the userId from the auth() function
-    where: { clerkUserId: userId }, // if user exists, return the user object
+    where: { clerkUserId: userId },// if user exists, return the user object
   });
 
   if (!user) throw new Error("User not found");
 
-  try{
-     // Start a transaction to handle both operations
-    const result = await db.$transaction( // transaction is a special function provided by Prisma to handle multiple operations in a single transaction
+  try {
+    // Start a transaction to handle both operations
+    const result = await db.$transaction(// transaction is a special function provided by Prisma to handle multiple operations in a single transaction
       // if any operation fails, the entire transaction will be rolled back and the error will be thrown
-
       async (tx) => { // tx is the transaction object
         // Prisma gives you a special transaction client (tx) inside db.$transaction().This tx must be used for all operations inside the transaction.
         // All queries are part of one atomic transaction.They share the same context (e.g., DB connection, isolation level).
         // It means You're executing the query within the transaction context — not as a regular standalone query.
         // operation-1 First check if industry exists
+        // First check if industry exists
         let industryInsight = await tx.industryInsight.findUnique({// The query is part of the transaction started by db.$transaction(...).
           // we find that in industryInsight table, does the industry column has industry passed by user in the form (data.industry)
           where: {
             industry: data.industry,
           },
         });
-    
-
-        // operation-2 If industry doesn't exist, create it with default values
+         // operation-2 If industry doesn't exist, create it with default values
+        // If industry doesn't exist, create it with default values
         if (!industryInsight) {
-         const insights = await generateAIInsights(data.industry); // Generate insights for the user's industry by retrieving the industry from the user object
-         
-              industryInsight = await db.industryInsight.create({ // Create a new industryInsight record in the database with the generated insights
-              data: { // in .create method, we pass the data object with the following properties industry, insights, and nextUpdate
-                 industry: data.industry,
-                 ...insights,
-                 nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Set nextUpdate to one week from now , it will be used to determine when the insights should be updated next
-               }, // it returns the newly created industryInsight record
-             });
-  }
+          const insights = await generateAIInsights(data.industry); // Generate insights for the user's industry by retrieving the industry from the user object
 
-        // operation-3 Now update the user's fields in the User table with the industry from the IndustryInsight table
+          industryInsight = await db.industryInsight.create({ // Create a new industryInsight record in the database with the generated insights
+            data: {// in .create method, we pass the data object with the following properties industry, insights, and nextUpdate
+              industry: data.industry,
+              ...insights,
+              nextUpdate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),// Set nextUpdate to one week from now , it will be used to determine when the insights should be updated next
+            },
+          });
+        }
+   // operation-3 Now update the user's fields in the User table with the industry from the IndustryInsight table
+        // Now update the user
         const updatedUser = await tx.user.update({
           where: {
             id: user.id,
           },
-          data: { // from industryInsight table, these are fields that overlap with user table so we can update them in user table
+          data: {// from industryInsight table, these are fields that overlap with user table so we can update them in user table
+
             industry: data.industry,
             experience: data.experience,
             bio: data.bio,
-            skills: data.skills,    
+            skills: data.skills,
           },
         });
 
-        return { updatedUser, industryInsight }; 
-    }, // end of transaction , we update user and industry in one transaction and return the updated user and industry 
-    {
-        timeout : 10000 // set timeout to 10 seconds if the transaction takes longer than 10 seconds, the transaction will be rolled back and the error will be thrown
-    }
+        return { updatedUser, industryInsight };
+      },// end of transaction , we update user and industry in one transaction and return the updated user and industry 
+      {
+        timeout: 10000, // set timeout to 10 seconds if the transaction takes longer than 10 seconds, the transaction will be rolled back and the error will be thrown
+      }
     );
 
-  }
-  catch(error) {
+    revalidatePath("/");
+    return result.user;
+  } catch (error) {
     console.error("Error updating user and industry:", error.message);
     throw new Error("Failed to update profile");
   }

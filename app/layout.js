@@ -17,9 +17,34 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
+     appearance={{
+    baseTheme: dark,
+    variables: {
+      colorPrimary: "#06b6d4", // Cyan-400
+      colorText: "#0ea5e9", // Light cyan/blue text
+      colorBackground: "#0f172a", // Match your app bg
+      colorInputBackground: "#0d1117", // Match input bg
+      colorInputText: "#ffffff",
+      colorDanger: "#f87171", // Red-400 for errors
+    },
+    elements: {
+      card: "shadow-lg border border-cyan-500/20 bg-[#0f172a]",
+      headerTitle: "text-cyan-400 text-lg font-bold",
+      formButtonPrimary:
+        "bg-gradient-to-r from-cyan-400 to-blue-500 text-white hover:opacity-90 transition",
+      formFieldInput: "bg-[#0d1117] text-white placeholder:text-gray-400",
+      footerActionText: "text-cyan-400",
+      footer: "border-t border-cyan-400",
+    },
+    layout: {
+      socialButtonsPlacement: "top",
+      socialButtonsVariant: "button", // Or "iconButton" if you prefer
+      helpPageUrl: "/help",
+      privacyPageUrl: "/privacy",
+      termsPageUrl: "/terms",
+      showOptionalFields: false,
+    },
+  }}
     >
     <html lang="en" suppressHydrationWarning>
       <body

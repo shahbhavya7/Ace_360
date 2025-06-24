@@ -73,8 +73,6 @@ const OnboardingForm = ({ industries }) => {
     }
   };
 
-
-
   useEffect(() => { // this useEffect hook is called whenever the updateResult or updateLoading state changes according to useFetch hook
     if (updateResult?.success && !updateLoading) {
       toast.success("Profile completed successfully!");

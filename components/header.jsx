@@ -44,18 +44,28 @@ const header = async() => {
     <div className="flex items-center space-x-2 md:space-x-4">
       <SignedIn>
         {/* Dashboard Button */}
-        <Link href="/dashboard">
-          <Button
-            variant="ghost"
-            className="bg-[#0f172a] text-cyan-300 border border-cyan-500 hover:bg-cyan-900/40 transition"
-          >
-            <LayoutDashboard className="h-4 w-4" />
-            Industry Insights
-          </Button>
-          <Button variant="ghost" className="md:hidden w-10 h-10 p-0 text-cyan-300 hover:text-cyan-100">
-            <LayoutDashboard className="h-4 w-4" />
-          </Button>
-        </Link>
+       <div className="flex items-center">
+  {/* Desktop View: Full Button */}
+  <Link href="/dashboard">
+    <Button
+      variant="ghost"
+      className="hidden md:inline-flex items-center gap-2 bg-[#0f172a] text-cyan-300 border border-cyan-500 hover:bg-cyan-900/40 transition"
+    >
+      <LayoutDashboard className="h-4 w-4" />
+      Industry Insights
+    </Button>
+  </Link>
+
+  {/* Mobile View: Icon-only Button */}
+  <Link href="/dashboard">
+    <Button
+      variant="ghost"
+      className="md:hidden w-10 h-10 p-0 text-cyan-300 hover:text-cyan-100"
+    >
+      <LayoutDashboard className="h-4 w-4" />
+    </Button>
+  </Link>
+</div>
 
         {/* Growth Tools Dropdown */}
         <DropdownMenu>

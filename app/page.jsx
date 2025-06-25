@@ -150,65 +150,7 @@ export default function Home() {
   </div>
 </section>
 
-<section className="w-full py-12 md:py-24 ">
-  <div className="container mx-auto px-4 md:px-6">
-    {/* Section Heading */}
-    <h2
-      className="text-3xl font-extrabold tracking-tight text-center mb-3
-                 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500
-                 bg-clip-text text-transparent animate-gradient-slow leading-tight"
-    >
-      What Our Users Say
-    </h2>
 
-    {/* Optional subtitle */}
-    <p className="text-center text-cyan-200/70 max-w-xl mx-auto mb-12 text-sm md:text-base">
-      Real voices from professionals growing their careers with us.
-    </p>
-
-    {/* Testimonials Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      {testimonial.map((testimonial, index) => (
-        <Card
-          key={index}
-          className=" border border-cyan-500/10 hover:border-cyan-400/20 
-                     hover:shadow-cyan-400/20 transition duration-300 rounded-2xl"
-        >
-          <CardContent className="pt-6 px-6">
-            <div className="flex flex-col space-y-4">
-              {/* Author Info */}
-              <div className="flex items-center space-x-4 mb-2">
-                <div className="relative h-12 w-12 flex-shrink-0">
-                  <Image
-                    width={48}
-                    height={48}
-                    src={testimonial.image}
-                    alt={testimonial.author}
-                    className="rounded-full object-cover border-2 border-cyan-400/20"
-                  />
-                </div>
-                <div>
-                  <p className="font-semibold text-white">{testimonial.author}</p>
-                  <p className="text-sm text-cyan-200/70">{testimonial.role}</p>
-                  <p className="text-sm text-cyan-400">{testimonial.company}</p>
-                </div>
-              </div>
-
-              {/* Quote */}
-              <blockquote>
-                <p className="text-cyan-200/80 italic relative leading-relaxed">
-                  <span className="text-2xl text-cyan-400 absolute -top-4 -left-2">“</span>
-                  {testimonial.quote}
-                  <span className="text-2xl text-cyan-400 absolute -bottom-2">”</span>
-                </p>
-              </blockquote>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
-  </div>
-</section>
 
 {/* FAQ Section */}
 <section className="w-full py-12 md:py-24 ">

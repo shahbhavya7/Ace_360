@@ -304,9 +304,9 @@ We welcome contributions to make Ace 360 even better!
   
   **Get in Touch**
   
-  [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your-email@example.com)
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
-  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+  [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your-bhavyashah16@outlook.com)
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/bhavya-shah-a36a86282/)
+  [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahbhavya7)
   
 </div>
 
@@ -316,7 +316,7 @@ We welcome contributions to make Ace 360 even better!
   
   **Built with 💪 for Career Success**
   
-  ⭐ Star this repository if Ace 360 helped advance your career!
+  ⭐ Star this repository if Ace 360 helped advance your career !
   
 
   

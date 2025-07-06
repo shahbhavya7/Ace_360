@@ -235,7 +235,6 @@ NEXT_PUBLIC_APP_URL=https://your-domain.com
 - **Shadcn UI Components**: Modern, accessible component library
 - **Tailwind CSS**: Utility-first styling approach
 - **Responsive Design**: Perfect on all devices
-- **Dark/Light Mode**: User preference support
 - **Smooth Animations**: Framer Motion integration
 
 ### User Experience
@@ -311,7 +310,7 @@ We welcome contributions to make Ace 360 even better!
   
 </div>
 
----
+
 
 <div align="center">
   
@@ -319,7 +318,7 @@ We welcome contributions to make Ace 360 even better!
   
   ⭐ Star this repository if Ace 360 helped advance your career!
   
-  [🔝 Back to top](#-ace-360)
+
   
 </div>
 

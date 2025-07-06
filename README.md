@@ -1,4 +1,4 @@
-# 🚀 Ace 360 - Your Complete Career Development Platform
+# 🚀 Ace 360 - Your Complete Career Growth Platform
 
 <div align="center">
   
@@ -109,6 +109,7 @@ npm --version
   ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
   ![Inngest](https://img.shields.io/badge/Inngest-6366F1?style=for-the-badge&logo=inngest&logoColor=white)
    [![Powered by Google Gemini](https://img.shields.io/badge/Powered%20by-Google%20Gemini-4285F4?style=for-the-badge&logo=google)](https://ai.google.dev)
+    ![Clerk](https://img.shields.io/badge/Clerk-6C47FF?style=for-the-badge&logo=clerk&logoColor=white)
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
   ![Shadcn UI](https://img.shields.io/badge/Shadcn%20UI-000000?style=for-the-badge&logo=shadcnui&logoColor=white)
   
@@ -135,7 +136,7 @@ graph TD
     B --> E[📄 Cover Letter Generator]
     B --> F[🎯 Prep Journey]
     
-    C --> G[🎲 Domain Quiz]
+    C --> G[🎲 Domain based Quiz]
     G --> H[📈 Performance Analysis]
     H --> I[💾 Progress Storage]
     
@@ -197,16 +198,14 @@ graph TD
 DATABASE_URL=postgresql://username:password@host:port/database
 
 # AI Services
-OPENAI_API_KEY=your_openai_api_key
-ANTHROPIC_API_KEY=your_anthropic_api_key
+GEMINI_API_KEY=your_gemini_api_key
 
 # Background Jobs
 INNGEST_EVENT_KEY=your_inngest_event_key
 INNGEST_SIGNING_KEY=your_inngest_signing_key
 
 # Authentication
-NEXTAUTH_SECRET=your_nextauth_secret
-NEXTAUTH_URL=http://localhost:3000
+CLERK_SECRET_KEY=your_clerk_secret_key
 
 # Optional
 NEXT_PUBLIC_APP_URL=https://your-domain.com

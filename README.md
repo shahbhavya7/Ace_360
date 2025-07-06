@@ -30,10 +30,10 @@
   |:------------------:|:----------------------:|:-------------------:|
   | Progress tracking | Secure database storage | Sleek, responsive design |
   | Performance analytics | Retrieve anytime | Dark/Light mode support |
-  ---
+  
 </div>
 
-### ✨ What makes Ace 360 special?
+## ✨ What makes Ace 360 special?
 
 - **🧠 AI-Powered Career Intelligence** - Complete career development ecosystem powered by advanced AI
 - **📊 Industry Insights Dashboard** - Real-time analysis of current market trends and opportunities
@@ -75,8 +75,9 @@ npm --version
    
    # Add your configuration
    echo "DATABASE_URL=your_neon_db_connection_string" >> .env.local
-   echo "OPENAI_API_KEY=your_openai_api_key" >> .env.local
+   echo "GEMINI_API_KEY=your_gemini_api_key" >> .env.local
    echo "INNGEST_EVENT_KEY=your_inngest_event_key" >> .env.local
+   echo "CLERK_SECRET_KEY=your_clerk_secret_key" >> .env.local
    echo "NEXTAUTH_SECRET=your_nextauth_secret" >> .env.local
    ```
 
@@ -119,6 +120,7 @@ npm --version
 
 - **Frontend**: Next.js with React (Server-side rendering & optimal performance)
 - **Database**: Neon DB (Serverless PostgreSQL for scalability)
+- **Authentication**: Clerk (Secure user authentication & management)
 - **ORM**: Prisma (Type-safe database operations)
 - **Background Jobs**: Inngest (Reliable task processing)
 - **Styling**: Tailwind CSS + Shadcn UI (Modern, accessible design system)
@@ -136,7 +138,7 @@ graph TD
     B --> E[📄 Cover Letter Generator]
     B --> F[🎯 Prep Journey]
     
-    C --> G[🎲 Domain based Quiz]
+    C --> G[🎲 Domain Based Quiz]
     G --> H[📈 Performance Analysis]
     H --> I[💾 Progress Storage]
     
